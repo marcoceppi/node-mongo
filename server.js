@@ -3,7 +3,8 @@ var http = require('http'),
     path = require('path'),
     MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
-    CollectionDriver = require('./collectionDriver').CollectionDriver;
+    CollectionDriver = require('./collectionDriver').CollectionDriver
+    config = require('./config/config');
  
 var app = express();
 app.set('port', process.env.PORT || 3000); 
@@ -11,8 +12,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.bodyParser()); // <-- add
 
-var mongoHost = 'localHost'; //A
-var mongoPort = 27017; 
+var mongoHost = config.mongo_host; //A
+var mongoPort = config.mongo_port;
 var collectionDriver;
  
 var mongoClient = new MongoClient(new Server(mongoHost, mongoPort)); //B
